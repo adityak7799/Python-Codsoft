@@ -1,0 +1,126 @@
+import random
+
+def get_user_choice():
+    while True:
+        print("\nChoose one: Rock, Paper, or Scissors")
+        user_input = input("Your choice: ").strip().lower()
+        if user_input in ['rock', 'paper', 'scissors']:
+            return user_input
+        else:
+            print("Invalid input! Please choose Rock, Paper, or Scissors.")
+
+def get_computer_choice():
+    return random.choice(['rock', 'paper', 'scissors'])
+
+def determine_winner(user, computer):
+    if user == computer:
+        return "tie"
+    elif (user == "rock" and computer == "scissors") or \
+         (user == "scissors" and computer == "paper") or \
+         (user == "paper" and computer == "rock"):
+        return "user"
+    else:
+        return "computer"
+
+def play_game():
+    user_score = 0
+    computer_score = 0
+
+    print("🎮 Welcome to Rock-Paper-Scissors Game! 🎮")
+
+    while True:
+        user_choice = get_user_choice()
+        computer_choice = get_computer_choice()
+
+        print(f"\n🧑 You chose: {user_choice.capitalize()}")
+        print(f"💻 Computer chose: {computer_choice.capitalize()}")
+
+        result = determine_winner(user_choice, computer_choice)
+
+        if result == "tie":
+            print("🤝 It's a tie!")
+        elif result == "user":
+            print("✅ You win this round!")
+            user_score += 1
+        else:
+            print("❌ Computer wins this round!")
+            computer_score += 1
+
+        print(f"\n🏆 Scores => You: {user_score} | Computer: {computer_score}")
+
+        play_again = input("\nDo you want to play another round? (yes/no): ").strip().lower()
+        if play_again != 'yes':
+            print("\n🎉 Final Score 🎉")
+            print(f"You: {user_score} | Computer: {computer_score}")
+            print("Thanks for playing! Goodbye!")
+            break
+
+# Run the game
+play_game() 
+
+
+import random
+import string
+
+def generate_password(length):
+    # Combine all possible characters: letters, digits, and punctuation
+    characters = string.ascii_letters + string.digits + string.punctuation
+    # Randomly select characters from the combined pool
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+# Prompt user for password length
+try:
+    length = int(input("Enter the desired password length: "))
+    if length <= 0:
+        print("Please enter a positive number.")
+    else:
+        # Generate and display the password
+        password = generate_password(length)
+        print(f"Generated Password: {password}")
+except ValueError:
+    print("Invalid input. Please enter a number.")
+
+
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y == 0:
+        return "Error: Cannot divide by zero!"
+    return x / y
+
+print("Simple Calculator")
+print("------------------")
+print("Select operation:")
+print("1. Addition (+)")
+print("2. Subtraction (-)")
+print("3. Multiplication (*)")
+print("4. Division (/)")
+
+try:
+    num1 = float(input("\nEnter first number: "))
+    num2 = float(input("Enter second number: "))
+    choice = input("Enter choice (+, -, *, /): ")
+
+    if choice == '+':
+        result = add(num1, num2)
+    elif choice == '-':
+        result = subtract(num1, num2)
+    elif choice == '*':
+        result = multiply(num1, num2)
+    elif choice == '/':
+        result = divide(num1, num2)
+    else:
+        result = "Invalid operation choice."
+
+    print(f"\nResult: {result}")
+
+except ValueError:
+    print("Invalid input. Please enter numeric values.")
